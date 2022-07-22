@@ -41,14 +41,11 @@ include_once("../user/user.php");
         ajax.send();
         ajax.onreadystatechange = function(){
             if(this.readyState == 4 && this.status == 200) {
-            let data = JSON.parse(this.responseText);
-            // console.log(data);
+            let data = JSON.parse(this.responseText);           
             createTable(data);
             sessionStorage.setItem("data", JSON.stringify(data));
             }
-        }
-
-        
+        }        
         function createTable(data) {
             let html = "";
            for (let i = 0; i < data.length; i++){
@@ -73,11 +70,10 @@ include_once("../user/user.php");
             html +="<td>" + "<a href='view.php?emp="+ id +"' class='btn'>view</a>" + "</td>";
             html += "</tr>";
            let tBody = document.querySelector("tbody").innerHTML = html;
-         //  console.log(id);          
+                
            }   
         }
       });
-
       function sendMailPopup() {
             let data = sessionStorage.getItem("data");
             data = JSON.parse(data);
@@ -102,11 +98,9 @@ include_once("../user/user.php");
                 html +="<td>" + address + "</td>";
                 html += "</tr>";
                 let tBody = document.querySelector("#ajax-rec").innerHTML = html;
-            //  console.log(id);          
+                     
             } 
-        }
-      
-     
+        }     
     </script>
 </head>
 <body>
@@ -150,13 +144,7 @@ include_once("../user/user.php");
       let popWind = document.getElementById("pop_window");
         pop.addEventListener("click",function(){
         popWind.style.display = "block";
-      });
-//       window.addEventListener("mouseleave", function (event) {
-//     if (event.target != popWind) {
-//         popWind.style.display = "none";
-//     }
-// });
-
+      });     
 </script>
 </body>
 </html>
