@@ -118,10 +118,11 @@ if(isset($_POST['Add'])){
                 name="address"
               />
             </div>          
-            <div class="submit">
+            <div class="submit form--btn">
               <input
                 type="submit"
                 id="submit"
+                class="btn"
                 name="Add"
                 value="Add"
               />

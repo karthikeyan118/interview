@@ -182,4 +182,15 @@ h3 {
 }
 .pop__up {
   box-shadow: 0 2px 4px rgb(15 34 58 / 12%);
+  width: 30%;
+  border-radius: 10px;
+}
+.send-mail {
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+.form--btn .btn {
+  margin-bottom: 2rem;
+  margin-top: 3rem;
+  float: right;
 }

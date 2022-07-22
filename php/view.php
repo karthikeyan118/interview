@@ -103,10 +103,11 @@ $result = $view->viewTask($empId);
                 value="<?php echo $res['address']; ?>" readonly
               />
             </div>          
-            <div class="submit">
+            <div class="submit form--btn">
               <input
                 type="submit"
                 id="submit"
+                class="btn"
                 name="ok"
                 value="ok"
               />

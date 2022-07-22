@@ -111,10 +111,11 @@ if(isset($_POST['update'])) {
                 value="<?php echo $res['address']; ?>"
               />
             </div>          
-            <div class="submit">
+            <div class="submit form--btn">
               <input
                 type="submit"
                 id="submit"
+                class="btn"               
                 name="update"
                 value="update"
               />

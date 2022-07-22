@@ -87,7 +87,10 @@ include_once("../user/user.php");
 </div>
 <table id="example" class="display" width="100%"></table>
 <div class="pop__up">
-    <p class=send-mail>Enter email address</p>
+    <div>
+    <p class="send-mail">Enter email address</p>
+    <input type="email" class="mail-share" placeholder="E-mail">
+    </div>
 </div>
 </div>
 </body>
