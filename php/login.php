@@ -60,8 +60,7 @@ if(isset($_POST['Login'])) {
             </div>
             <div class="first-text">
               <div class="forgot">
-                <p class="danger__gap">Password</p>
-                <a href="forgot.php" class="pass-link">Forgot Password?</a>
+                <p class="danger__gap">Password</p>               
               </div>
               <input
                 type="password"
@@ -84,7 +83,7 @@ if(isset($_POST['Login'])) {
               </div>
             </div>
             <div class="submit">
-              <input type="submit" name="Login" value="Login" />
+              <input type="submit" class="btn btn8" name="Login" value="Login" />
             </div>
           </form>
         </div>

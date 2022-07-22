@@ -20,10 +20,7 @@ include_once("../user/user.php");
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
     <script>
-        
-     
-
-      $(document).ready(function () {
+        $(document).ready(function () {
         $("#example").DataTable({
                  
           columns: [
@@ -35,18 +32,25 @@ include_once("../user/user.php");
             { title: "address" },
           ],         
         });
-      });
-      let ajax = new XMLHttpRequest();
-      let method = "GET";
-      let url = "data.php";
-      let asynchronous = true;
-      ajax.open(method,url,asynchronous);
-      ajax.send();
-      ajax.onreadystatechange = function(){
-        if(this.readyState == 4 && this.status == 200) {
-           let data = JSON.parse(this.responseText);
-           console.log(data);
-           let html = "";
+
+        let ajax = new XMLHttpRequest();
+        let method = "GET";
+        let url = "data.php";
+        let asynchronous = true;
+        ajax.open(method,url,asynchronous);
+        ajax.send();
+        ajax.onreadystatechange = function(){
+            if(this.readyState == 4 && this.status == 200) {
+            let data = JSON.parse(this.responseText);
+            // console.log(data);
+            createTable(data);
+            sessionStorage.setItem("data", JSON.stringify(data));
+            }
+        }
+
+        
+        function createTable(data) {
+            let html = "";
            for (let i = 0; i < data.length; i++){
             let firstname = data[i].first_name;
             let lastname = data[i].last_name;
@@ -69,29 +73,90 @@ include_once("../user/user.php");
             html +="<td>" + "<a href='view.php?emp="+ id +"' class='btn'>view</a>" + "</td>";
             html += "</tr>";
            let tBody = document.querySelector("tbody").innerHTML = html;
-         //  console.log(id);
-          
-           }
-           
+         //  console.log(id);          
+           }   
         }
-      }
+      });
+
+      function sendMailPopup() {
+            let data = sessionStorage.getItem("data");
+            data = JSON.parse(data);
+
+            let html = "";
+            for (let i = 0; i < data.length; i++){console.log(data)
+                let firstname = data[i].first_name;
+                let lastname = data[i].last_name;
+                let gender = data[i].gender;
+                let age = data[i].age;
+                let email = data[i].email;
+                let address = data[i].address;
+                let id = data[i].emp_id;
+            
+                //appending
+                html += "<tr>";
+                html +="<td>" + firstname + "</td>";
+                html +="<td>" + lastname + "</td>";
+                html +="<td>" + gender + "</td>";
+                html +="<td>" + age + "</td>";
+                html +="<td>" + email + "</td>";
+                html +="<td>" + address + "</td>";
+                html += "</tr>";
+                let tBody = document.querySelector("#ajax-rec").innerHTML = html;
+            //  console.log(id);          
+            } 
+        }
       
+     
     </script>
 </head>
 <body>
 <div class="container">
 <div class="log__out">
 <a href="add.php" class="btn">Add</a>
-<a href="popup.php" class="btn">sendmail</a>
+<button class="btn" id="pop_card" onclick="sendMailPopup()">sendmail</button>
 <a href="logout.php" class="btn btn-red">logout</a>
 </div>
 <table id="example" class="display" width="100%"></table>
-<div class="pop__up">
+<div class="pop__up" id="pop_window">
+    <form>
     <div>
     <p class="send-mail">Enter email address</p>
-    <input type="email" class="mail-share" placeholder="E-mail">
+    <input type="email" class="mail-share" placeholder="E-mail" required>
     </div>
+    <table class="pop-table">
+        <thead class="small-head">
+            <tr>
+                <th>firstname</th>
+                <th>lastname</th>
+                <th>gender</th>
+                <th>age</th>
+                <th>email</th>
+                <th>address</th>
+            </tr>
+        </thead>
+        <tbody id="ajax-rec">
+            
+        </tbody>
+    </table>
+    <div class="button-send">
+        <input type="submit" class="btn" name="Send" value="Send">
+               <a href="index.php" class="btn btn-red">Cancel</a>
+    </div>
+    </form>
 </div>
 </div>
+<script>
+ let pop = document.getElementById("pop_card");
+      let popWind = document.getElementById("pop_window");
+        pop.addEventListener("click",function(){
+        popWind.style.display = "block";
+      });
+//       window.addEventListener("mouseleave", function (event) {
+//     if (event.target != popWind) {
+//         popWind.style.display = "none";
+//     }
+// });
+
+</script>
 </body>
 </html>
